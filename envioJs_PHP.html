@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Formulario request</title>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            function validarFormulario() {
+                var nombre = document.Forma01.nombre.value;
+                var correo = document.Forma01.correo.value;
+                var sexo = document.querySelector('input[name="sexo"]:checked');
+                var boletin = document.Forma01.boletin.checked;
+                var comentario = document.Forma01.comentario.value;
+                var carrera = document.Forma01.carrera.value;
+                var pasw = document.Forma01.pasw.value;
+                var promedio = document.Forma01.promedio.value;
+                var fecha = document.Forma01.fecha.value;
+
+                var errorMensaje = "";
+
+                if (nombre === "") {
+                    errorMensaje += "El campo Nombre es obligatorio.\n";
+                }
+
+                if (correo === "") {
+                    errorMensaje += "El campo Correo es obligatorio.\n";
+                }
+
+                if (!sexo) {
+                    errorMensaje += "Debe seleccionar un género.\n";
+                }
+
+                if (comentario === "") {
+                    errorMensaje += "El campo Comentario es obligatorio.\n";
+                }
+
+                if (carrera === "0") {
+                    errorMensaje += "Debe seleccionar una Carrera.\n";
+                }
+
+                if (pasw === "") {
+                    errorMensaje += "El campo Contraseña es obligatorio.\n";
+                }
+
+                if (promedio === "") {
+                    errorMensaje += "El campo Promedio es obligatorio.\n";
+                }
+
+                if (fecha === "") {
+                    errorMensaje += "El campo Fecha de nacimiento es obligatorio.\n";
+                }
+
+                if (errorMensaje !== "") {
+                    alert("Faltan campos por llenar:\n" + errorMensaje);
+                } else {
+                    document.Forma01.method = 'post';
+                    document.Forma01.action = 'recibe.php';
+                    document.Forma01.submit();
+                }
+            }
+
+            // Asigna el evento clic al botón de enviar usando jQuery
+            $("#enviarBtn").click(function () {
+                validarFormulario();
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+    <form name="Forma01" action="recibe14.php" method="POST">
+        <label>
+            Nombre:
+            <input id="campo1" type="text" name="nombre" placeholder="Escribe tu nombre" required>
+        </label>
+
+        <br>
+        <label>Correo:</label>
+        <input type="email" name="correo" value="@udg.mx">
+        <br>
+        <label for="sexo">Género:</label>
+        <input type="radio" name="sexo" value="F">Femenino
+        <input type="radio" name="sexo" value="M">Masculino
+        <br>
+        <input type="checkbox" name="boletin" value="1" checked>
+        <label for="boletin">Recibir Boletín</label>
+        <br>
+        <label for="comentario">Comentario:</label><br>
+        <textarea name="comentario" cols="30" rows="5"></textarea>
+        <br>
+        <label for="carrera">Carrera:</label>
+        <select name="carrera">
+            <option value="0" selected>Selecciona</option>
+            <option value="1">Ing. Informática</option>
+            <option value="2">Ing. Computación</option>
+        </select>
+        <br>
+        <label for="pasw">Contraseña:</label>
+        <input type="password" name="pasw">
+        <br>
+        <label for="promedio">Promedio:</label>
+        <input type="number" name="promedio" min="60" max="100">
+        <br>
+        <label for="fecha">Fecha de nacimiento:</label>
+        <input type="date" name="fecha">
+
+        <br>
+        <!-- Cambia el tipo de botón a "button" y agrega un ID -->
+        <input id="enviarBtn" type="button" value="Enviar">
+    </form>
+
+</body>
+
+</html>
